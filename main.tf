@@ -10,6 +10,19 @@ resource "google_compute_subnetwork" "cka" {
   network       = google_compute_network.cka.id
 }
 
+resource "google_compute_firewall" "ssh" {
+  name = "allow-ssh"
+  allow {
+    ports    = ["22"]
+    protocol = "tcp"
+  }
+  direction     = "INGRESS"
+  network       = google_compute_network.cka.id
+  priority      = 1000
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["ssh"]
+}
+
 resource "google_compute_address" "master" {
   name   = "master"
   region = "us-central1"
