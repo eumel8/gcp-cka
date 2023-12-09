@@ -6,8 +6,13 @@ resource "google_compute_network" "cka" {
 resource "google_compute_subnetwork" "cka" {
   name          = "cka"
   ip_cidr_range = "10.0.1.0/24"
-  region        = "us-central1-a"
+  region        = "us-central1"
   network       = google_compute_network.cka.id
+}
+
+resource "google_compute_address" "master" {
+  name   = "master"
+  region = "us-central1"
 }
 
 resource "google_compute_instance" "master" {
@@ -24,6 +29,9 @@ resource "google_compute_instance" "master" {
   network_interface {
     network    = google_compute_network.cka.id
     subnetwork = google_compute_subnetwork.cka.id
+    access_config {
+      nat_ip = google_compute_address.master.address
+    }
   }
   boot_disk {
     initialize_params {
