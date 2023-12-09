@@ -30,7 +30,7 @@ resource "google_compute_address" "master" {
 
 resource "google_compute_instance" "master" {
   name         = "master"
-  tags         = ["allow-ssh"]
+  tags         = ["ssh"]
   zone         = "us-central1-a"
   machine_type = "e2-medium"
   scheduling {
