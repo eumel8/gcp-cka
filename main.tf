@@ -75,6 +75,32 @@ resource "google_compute_firewall" "nodeports" {
   target_tags   = ["nodeports"]
 }
 
+resource "google_compute_firewall" "weavetcp" {
+  name = "weaveudp"
+  allow {
+    ports    = ["6783"]
+    protocol = "tcp"
+  }
+  direction     = "INGRESS"
+  network       = google_compute_network.cka.id
+  priority      = 1000
+  source_tags   = ["kubelet"]
+  target_tags   = ["kubelet"]
+}
+
+resource "google_compute_firewall" "weaveudp" {
+  name = "weaveudp"
+  allow {
+    ports    = ["6783-6784"]
+    protocol = "udp"
+  }
+  direction     = "INGRESS"
+  network       = google_compute_network.cka.id
+  priority      = 1000
+  source_tags   = ["kubelet"]
+  target_tags   = ["kubelet"]
+}
+
 resource "google_compute_address" "master" {
   name   = "master"
   region = var.region
@@ -132,7 +158,7 @@ resource "google_compute_instance" "node1" {
     network    = google_compute_network.cka.id
     subnetwork = google_compute_subnetwork.cka.id
     access_config {
-      nat_ip = google_compute_address.node1.address
+      nat_ip = google_compute_address.node1[0].address
     }
   }
   boot_disk {
