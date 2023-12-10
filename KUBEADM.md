@@ -2,6 +2,8 @@
 
 This lab will setup Kubernetes with Kubeadm. See [official documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/), which is allowed during CKA exam.
 
+There are masses of tutorials on the Internet, this is just another one. Tested with Debian 11, Kubernetes 1.28 in December 2023.
+
 Requirements for hardware and operating systems are:
 
 - VM 2 CPU/4 GB Ram
@@ -165,7 +167,7 @@ apt update
 apt-get install -y kubeadm kubelet kubectl  
 ```
 
-At this point you have a running container runtime containerd, cri-o, or docker. This should stable run. Especially containerdneeds this adjustments for cgroup. There are cgroup v1 and v2, managed by itself or systemd. If this is wrong configured, kubelet won't start or give errors.
+At this point you have a running container runtime containerd, cri-o, or docker. This should stable run. Especially containerd needs this adjustments for cgroup. There are cgroup v1 and v2, managed by itself or systemd. If this is wrong configured, kubelet won't start or give errors.
 
 # init cluster
 
