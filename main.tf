@@ -6,7 +6,7 @@ resource "google_compute_network" "cka" {
 resource "google_compute_subnetwork" "cka" {
   name          = "cka"
   ip_cidr_range = "10.0.1.0/24"
-  region        = "us-central1"
+  region        = var.region
   network       = google_compute_network.cka.id
 }
 
@@ -77,19 +77,20 @@ resource "google_compute_firewall" "nodeports" {
 
 resource "google_compute_address" "master" {
   name   = "master"
-  region = "us-central1"
+  region = var.region
 }
 
 resource "google_compute_address" "node1" {
+  count  = var.create_nodes ? 1 : 0
   name   = "node1"
-  region = "us-central1"
+  region = var.region
 }
 
 resource "google_compute_instance" "master" {
   name         = "master"
   tags         = ["etcd","ssh","kubeapi","kubelet"]
-  zone         = "us-central1-a"
-  machine_type = "e2-medium"
+  zone         = var.zone
+  machine_type = var.flavor
   scheduling {
     preemptible                 = true
     automatic_restart           = false
@@ -105,7 +106,7 @@ resource "google_compute_instance" "master" {
   }
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-11"
+      image = var.image
     }
   }
   metadata = {
@@ -116,10 +117,11 @@ resource "google_compute_instance" "master" {
 }
 
 resource "google_compute_instance" "node1" {
+  count        = var.create_nodes ? 1 : 0
   name         = "node1"
   tags         = ["ssh","kubelet","nodeports"]
-  zone         = "us-central1-a"
-  machine_type = "e2-medium"
+  zone         = var.zone
+  machine_type = var.flavor
   scheduling {
     preemptible                 = true
     automatic_restart           = false
@@ -135,7 +137,7 @@ resource "google_compute_instance" "node1" {
   }
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-11"
+      image = var.image
     }
   }
   metadata = {
