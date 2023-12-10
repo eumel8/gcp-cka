@@ -9,7 +9,7 @@ Requirements for hardware and operating systems are:
 - VM 2 CPU/4 GB Ram
 - Debian 11 Bullseye
 
-- Firewall settings, following [Kubernetes Docs](https://v1-25.docs.kubernetes.io/docs/reference/networking/ports-and-protocols/#control-plane)
+- Firewall settings, following [Kubernetes Docs](https://v1-25.docs.kubernetes.io/docs/reference/networking/ports-and-protocols/#control-plane), setup with Terraform.
 
 # Swap, Kernel Modules, Kernel Configuration
 
