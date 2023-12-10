@@ -21,6 +21,7 @@ When you enter the Cloud Shell you need to set the ProjectId as environment (pic
 export GOOGLE_CLOUD_PROJECT=k8s-test-246009
 git clone https://github.com/eumel8/gcp-cka.git
 cd gcp-cka
+terraform plan
 terraform apply
 ```
 
