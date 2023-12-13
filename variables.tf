@@ -1,9 +1,9 @@
 variable "region" {
-  default = "us-central1"
+  default = "europe-west3-c"
 }
 
 variable "zone" {
-  default = "us-central1-a"
+  default = "europe-west3-c"
 }
 
 variable "flavor" {
@@ -17,4 +17,10 @@ variable "image" {
 variable "create_nodes" {
   type    = bool
   default = false
+}
+
+variable "network" {
+}
+
+variable "subnetwork" {
 }

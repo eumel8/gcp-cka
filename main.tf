@@ -1,14 +1,15 @@
 
-resource "google_compute_network" "cka" {
-  name                    = "cka"
-  auto_create_subnetworks = false
-}
-resource "google_compute_subnetwork" "cka" {
-  name          = "cka"
-  ip_cidr_range = "10.0.1.0/24"
-  region        = var.region
-  network       = google_compute_network.cka.id
-}
+# resource "google_compute_network" "cka" {
+#   name                    = "cka"
+#   auto_create_subnetworks = false
+# }
+
+# resource "google_compute_subnetwork" "cka" {
+#   name          = "cka"
+#   ip_cidr_range = "10.0.1.0/24"
+#   region        = var.region
+#   network       = google_compute_network.cka.id
+# }
 
 resource "google_compute_firewall" "ssh" {
   name = "ssh"
@@ -124,8 +125,8 @@ resource "google_compute_instance" "master" {
     instance_termination_action = "STOP"
   }
   network_interface {
-    network    = google_compute_network.cka.id
-    subnetwork = google_compute_subnetwork.cka.id
+    network    = var.network
+    subnetwork = var.subnetwork
     access_config {
       nat_ip = google_compute_address.master.address
     }
@@ -155,8 +156,8 @@ resource "google_compute_instance" "node1" {
     instance_termination_action = "STOP"
   }
   network_interface {
-    network    = google_compute_network.cka.id
-    subnetwork = google_compute_subnetwork.cka.id
+    network    = var.network
+    subnetwork = var.subnetwork
     access_config {
       nat_ip = google_compute_address.node1[0].address
     }
