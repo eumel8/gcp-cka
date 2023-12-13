@@ -125,7 +125,7 @@ resource "google_compute_instance" "master" {
     instance_termination_action = "STOP"
   }
   network_interface {
-    network    = var.network
+    #network    = var.network
     subnetwork = var.subnetwork
     #access_config {
     #  nat_ip = google_compute_address.master.address
@@ -156,7 +156,7 @@ resource "google_compute_instance" "node1" {
     instance_termination_action = "STOP"
   }
   network_interface {
-    network    = var.network
+    #network    = var.network
     subnetwork = var.subnetwork
     #access_config {
     #  nat_ip = google_compute_address.node1[0].address
