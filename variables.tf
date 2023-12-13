@@ -1,5 +1,6 @@
 variable "region" {
   default = "europe-west3"
+  #default = "europe-west4"
 }
 
 variable "zone" {
