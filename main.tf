@@ -8,7 +8,7 @@
 #   name          = "cka"
 #   ip_cidr_range = "10.0.1.0/24"
 #   region        = var.region
-#   network       = google_compute_network.cka.id
+#   network       = var.network
 # }
 
 resource "google_compute_firewall" "ssh" {
@@ -18,7 +18,7 @@ resource "google_compute_firewall" "ssh" {
     protocol = "tcp"
   }
   direction     = "INGRESS"
-  network       = google_compute_network.cka.id
+  network       = var.network
   priority      = 1000
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["ssh"]
@@ -31,7 +31,7 @@ resource "google_compute_firewall" "kubeapi" {
     protocol = "tcp"
   }
   direction     = "INGRESS"
-  network       = google_compute_network.cka.id
+  network       = var.network
   priority      = 1000
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["kubeapi"]
@@ -44,7 +44,7 @@ resource "google_compute_firewall" "kubelet" {
     protocol = "tcp"
   }
   direction     = "INGRESS"
-  network       = google_compute_network.cka.id
+  network       = var.network
   priority      = 1000
   source_tags   = ["kubelet"]
   target_tags   = ["kubelet"]
@@ -57,7 +57,7 @@ resource "google_compute_firewall" "etcd" {
     protocol = "tcp"
   }
   direction     = "INGRESS"
-  network       = google_compute_network.cka.id
+  network       = var.network
   priority      = 1000
   source_tags   = ["etcd"]
   target_tags   = ["etcd"]
@@ -70,7 +70,7 @@ resource "google_compute_firewall" "nodeports" {
     protocol = "tcp"
   }
   direction     = "INGRESS"
-  network       = google_compute_network.cka.id
+  network       = var.network
   priority      = 1000
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["nodeports"]
@@ -83,7 +83,7 @@ resource "google_compute_firewall" "weavetcp" {
     protocol = "tcp"
   }
   direction     = "INGRESS"
-  network       = google_compute_network.cka.id
+  network       = var.network
   priority      = 1000
   source_tags   = ["kubelet"]
   target_tags   = ["kubelet"]
@@ -96,7 +96,7 @@ resource "google_compute_firewall" "weaveudp" {
     protocol = "udp"
   }
   direction     = "INGRESS"
-  network       = google_compute_network.cka.id
+  network       = var.network
   priority      = 1000
   source_tags   = ["kubelet"]
   target_tags   = ["kubelet"]
