@@ -11,107 +11,107 @@
 #   network       = var.network
 # }
 
-resource "google_compute_firewall" "ssh" {
-  name = "ssh"
-  allow {
-    ports    = ["22"]
-    protocol = "tcp"
-  }
-  direction     = "INGRESS"
-  network       = var.network
-  priority      = 1000
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["ssh"]
-}
+#resource "google_compute_firewall" "ssh" {
+#  name = "ssh"
+#  allow {
+#    ports    = ["22"]
+#    protocol = "tcp"
+#  }
+#  direction     = "INGRESS"
+#  network       = var.network
+#  priority      = 1000
+#  source_ranges = ["0.0.0.0/0"]
+#  target_tags   = ["ssh"]
+#}
 
-resource "google_compute_firewall" "kubeapi" {
-  name = "kubeapi"
-  allow {
-    ports    = ["6443"]
-    protocol = "tcp"
-  }
-  direction     = "INGRESS"
-  network       = var.network
-  priority      = 1000
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["kubeapi"]
-}
+#resource "google_compute_firewall" "kubeapi" {
+#  name = "kubeapi"
+#  allow {
+#    ports    = ["6443"]
+#    protocol = "tcp"
+#  }
+#  direction     = "INGRESS"
+#  network       = var.network
+##  priority      = 1000
+#  source_ranges = ["0.0.0.0/0"]
+#  target_tags   = ["kubeapi"]
+#}
+#
+#resource "google_compute_firewall" "kubelet" {
+#  name = "kubelet"
+#  allow {
+#    ports    = ["10250"]
+#    protocol = "tcp"
+#  }
+#  direction     = "INGRESS"
+#  network       = var.network
+#  priority      = 1000
+#  source_tags   = ["kubelet"]
+#  target_tags   = ["kubelet"]
+#}
 
-resource "google_compute_firewall" "kubelet" {
-  name = "kubelet"
-  allow {
-    ports    = ["10250"]
-    protocol = "tcp"
-  }
-  direction     = "INGRESS"
-  network       = var.network
-  priority      = 1000
-  source_tags   = ["kubelet"]
-  target_tags   = ["kubelet"]
-}
+#resource "google_compute_firewall" "etcd" {
+#  name = "etcd"
+#  allow {
+#    ports    = ["2379","2380"]
+#    protocol = "tcp"
+#  }
+#  direction     = "INGRESS"
+#  network       = var.network
+#  priority      = 1000
+#  source_tags   = ["etcd"]
+#  target_tags   = ["etcd"]
+#}
 
-resource "google_compute_firewall" "etcd" {
-  name = "etcd"
-  allow {
-    ports    = ["2379","2380"]
-    protocol = "tcp"
-  }
-  direction     = "INGRESS"
-  network       = var.network
-  priority      = 1000
-  source_tags   = ["etcd"]
-  target_tags   = ["etcd"]
-}
+#resource "google_compute_firewall" "nodeports" {
+#  name = "nodeports"
+#  allow {
+#    ports    = ["30000-32767"]
+#    protocol = "tcp"
+#  }
+##  direction     = "INGRESS"
+#  network       = var.network
+#  priority      = 1000
+#  source_ranges = ["0.0.0.0/0"]
+#  target_tags   = ["nodeports"]
+#}
 
-resource "google_compute_firewall" "nodeports" {
-  name = "nodeports"
-  allow {
-    ports    = ["30000-32767"]
-    protocol = "tcp"
-  }
-  direction     = "INGRESS"
-  network       = var.network
-  priority      = 1000
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["nodeports"]
-}
+#resource "google_compute_firewall" "weavetcp" {
+#  name = "weaveudp"
+#  allow {
+#    ports    = ["6783"]
+#    protocol = "tcp"
+#  }
+#  direction     = "INGRESS"
+#  network       = var.network
+#  priority      = 1000
+#  source_tags   = ["kubelet"]
+#  target_tags   = ["kubelet"]
+#}
 
-resource "google_compute_firewall" "weavetcp" {
-  name = "weaveudp"
-  allow {
-    ports    = ["6783"]
-    protocol = "tcp"
-  }
-  direction     = "INGRESS"
-  network       = var.network
-  priority      = 1000
-  source_tags   = ["kubelet"]
-  target_tags   = ["kubelet"]
-}
+#resource "google_compute_firewall" "weaveudp" {
+#  name = "weaveudp"
+#  allow {
+#    ports    = ["6783-6784"]
+#    protocol = "udp"
+#  }
+#  direction     = "INGRESS"
+#  network       = var.network
+#  priority      = 1000
+#  source_tags   = ["kubelet"]
+#  target_tags   = ["kubelet"]
+#}
 
-resource "google_compute_firewall" "weaveudp" {
-  name = "weaveudp"
-  allow {
-    ports    = ["6783-6784"]
-    protocol = "udp"
-  }
-  direction     = "INGRESS"
-  network       = var.network
-  priority      = 1000
-  source_tags   = ["kubelet"]
-  target_tags   = ["kubelet"]
-}
+#resource "google_compute_address" "master" {
+#  name   = "master"
+#  region = var.region
+#}
 
-resource "google_compute_address" "master" {
-  name   = "master"
-  region = var.region
-}
-
-resource "google_compute_address" "node1" {
-  count  = var.create_nodes ? 1 : 0
-  name   = "node1"
-  region = var.region
-}
+#resource "google_compute_address" "node1" {
+#  count  = var.create_nodes ? 1 : 0
+#  name   = "node1"
+#  region = var.region
+#}
 
 resource "google_compute_instance" "master" {
   name         = "master"
