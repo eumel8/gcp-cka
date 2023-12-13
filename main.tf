@@ -127,9 +127,9 @@ resource "google_compute_instance" "master" {
   network_interface {
     network    = var.network
     subnetwork = var.subnetwork
-    access_config {
-      nat_ip = google_compute_address.master.address
-    }
+    #access_config {
+    #  nat_ip = google_compute_address.master.address
+    #}
   }
   boot_disk {
     initialize_params {
@@ -158,9 +158,9 @@ resource "google_compute_instance" "node1" {
   network_interface {
     network    = var.network
     subnetwork = var.subnetwork
-    access_config {
-      nat_ip = google_compute_address.node1[0].address
-    }
+    #access_config {
+    #  nat_ip = google_compute_address.node1[0].address
+    #}
   }
   boot_disk {
     initialize_params {
