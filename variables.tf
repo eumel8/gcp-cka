@@ -20,7 +20,9 @@ variable "create_nodes" {
 }
 
 variable "network" {
+  # default = "sbx-spoke-0"
 }
 
 variable "subnetwork" {
+  # default = "sbx-ew3-shared"
 }
