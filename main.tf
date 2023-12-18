@@ -76,7 +76,7 @@ resource "google_compute_firewall" "nodeports" {
 }
 
 resource "google_compute_firewall" "weavetcp" {
-  name = "weaveudp"
+  name = "weavetcp"
   allow {
     ports    = ["6783"]
     protocol = "tcp"
